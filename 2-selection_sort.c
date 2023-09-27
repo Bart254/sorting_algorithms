@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 /**
- * selction_sort - uses selection algorithm to sort a list in ascending order
+ * selection_sort - uses selection algorithm to sort a list in ascending order
  * @array: array to be sorted
  * @size: size of the array
  *

@@ -6,35 +6,51 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *ptr_a, *ptr_b, *temp;
+	listint_t *ptr, *a, *b;
 	int swaps;
 
 	if (!list)
 		return;
-	ptr_a = *list;
-	while (ptr_a)
+	ptr = *list;
+	while (ptr)
 	{
 		swaps = 0;
-		for (ptr_b = ptr_a; ptr_b && ptr_b->prev; ptr_b = ptr_b->prev)
+		for (a = ptr, b = a->prev; b;)
 		{
-			if (ptr_b->n < (ptr_b->prev)->n)
+			if (a->n < b->n)
 			{
 				if (swaps == 0)
-					ptr_a = ptr_a->next;
-				temp = ptr_b->prev;
-				temp->next = ptr_b->next;
-				ptr_b->next = temp;
-				ptr_b->prev = temp->prev;
-				temp->prev = ptr_b;
-				if (ptr_b->prev)
-					(ptr_b->prev)->next = ptr_b;
-				if (temp->next)
-					(temp->next)->prev = temp;
+					ptr = ptr->next;
+				swap(list, a, b);
 				swaps++;
 				print_list(*list);
+				b = a->prev;
 			}
 			else
-				ptr_a = ptr_a->next;
+				break;
 		}
+		if (swaps == 0)
+			ptr = ptr->next;
 	}
 }
+
+/**
+ * swap - swaps the nodes of a list
+ * @list: head node
+ * @a: node to be inserted
+ * @b: second node
+ */
+void swap(listint_t **list, listint_t *a, listint_t *b)
+{
+	b->next = a->next;
+	a->prev = b->prev;
+	a->next = b;
+	b->prev = a;
+	if (b->next != NULL)
+		(b->next)->prev = b;
+	if (a->prev != NULL)
+		(a->prev)->next = a;
+	else
+		*list = a;
+}
+

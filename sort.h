@@ -22,5 +22,6 @@ void selection_sort(int *array, size_t size);
 void insertion_sort_list(listint_t **list);
 void quick_sort(int *array, size_t size);
 void sort(int *array, int low, int high);
+void swap(listint_t **list, listint_t *a, listint_t *b);
 
 #endif
